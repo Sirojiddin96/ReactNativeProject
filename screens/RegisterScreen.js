@@ -23,15 +23,15 @@ const LoginScreen =({navigation})=>{
         </View>
         <Text style={styles.text}>A'zolik</Text>
         <TextInput 
-        label='Email'
+        placeholder="Enter your Email"
         style={styles.input}
         />
         <TextInput 
-        label='Password'
+        placeholder="Enter your Password"
         style={styles.input}
         />
         <TextInput 
-        label='Confirm Password'
+        placeholder="Confirm Password"
         style={styles.input}
         />
         <View style={styles.btnContainer}> 
@@ -66,13 +66,15 @@ const LoginScreen =({navigation})=>{
         width:200,
         height:44,
         padding:1,
-        textAlign:'center',
+        alignItems:'flex-start',
         fontWeight:'bold',
         borderWidth:1,
         borderColor:'black',
         marginBottom:10,
         borderRadius:10,
-        fontSize:25
+        fontSize:15,
+        justifyContent:'flex-start'
+
       },
     btnContainer:{
         width:200,
