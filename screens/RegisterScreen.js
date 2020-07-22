@@ -1,88 +1,109 @@
-import React, {useState} from 'react'
-import {View, Text, StyleSheet,Button, TextInput, Image} from 'react-native'
-import { State } from 'react-native-gesture-handler';
-// import { TextInput } from 'react-native-gesture-handler';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TextInput,
+  Image,
+  ImageBackground,
+} from "react-native";
+import * as Yup from "yup";
 
-const LoginScreen =({navigation})=>{
-    const [email, setEmail]=useState(false),
-    // const [password, setPassword]=useState(false),
-    // const [confirmPassword, setConfirmPassword]=useState(false);
-    validate=()=>{
-        const reg=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if(reg.test(email)===true){
-            alert('Valid');
-        }         
-        else{
-            alert()
-        }
-    }
-    return(
-      <View style={styles.container}>
-        <View style={styles.ImgContainer}>
-            <Image style={{width:'100%', height:'100%'}}  source={require('../assets/images/logo.jpg')}/>
-        </View>
-        <Text style={styles.text}>A'zolik</Text>
-        <TextInput 
-        placeholder="Enter your Email"
-        style={styles.input}
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../components/forms";
+import Screen from "../components/Screen";
+import routes from "../navigation/routes";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required().label("Name"),
+  email: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(4).label("Password"),
+});
+
+const Register = ({ navigation }) => {
+  const handleSubmit = () => {};
+  return (
+    <ImageBackground
+      blurRadius={10}
+      style={styles.background}
+      source={require("../assets/images/background.jpg")}
+    >
+      <View style={styles.logoContainer}>
+        <Image
+          style={styles.logo}
+          source={require("../assets/images/imageLogo.jpg")}
         />
-        <TextInput 
-        placeholder="Enter your Password"
-        style={styles.input}
-        />
-        <TextInput 
-        placeholder="Confirm Password"
-        style={styles.input}
-        />
-        <View style={styles.btnContainer}> 
-            <Button title="A'zomisiz?" onPress={()=>navigation.navigate('Login')}/>
-            <Button title="Kirish"/>
-        </View>
+        <Text style={styles.tagline}>Start your Korean language Advanture</Text>
       </View>
-    );
-  }
-  const styles=StyleSheet.create({
-    container: {
-        width:'100%',
-        height:'100%',
-        flex: 1,
-        backgroundColor: '#fff',
-        flexDirection:'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      ImgContainer:{
-        width:200,
-        height:100,
-      },
-      text:{
-        width:100,
-        fontWeight:'bold',
-        marginBottom:5,
-        marginTop:5,
-        textAlign:'center'
-      },
-    input:{
-        width:200,
-        height:44,
-        padding:1,
-        alignItems:'flex-start',
-        fontWeight:'bold',
-        borderWidth:1,
-        borderColor:'black',
-        marginBottom:10,
-        borderRadius:10,
-        fontSize:15,
-        justifyContent:'flex-start'
-
-      },
-    btnContainer:{
-        width:200,
-        height:40,
-        alignItems:'center',
-        flexDirection:'row',
-        justifyContent:'space-around'
-    }
-
-  })
-  export default LoginScreen;
+      <Screen style={styles.container}>
+        <Form
+          initialValues={{ name: "", email: "", password: "" }}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+        >
+          {/* <ErrorMessage error={error} visible={error} /> */}
+          <FormField
+            autoCorrect={false}
+            icon="account"
+            name="name"
+            placeholder="Name Please"
+          />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="email"
+            keyboardType="email-address"
+            name="name"
+            placeholder="Email Please"
+            textContentType="emailAddress"
+          />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            name="password"
+            placeholder="Password Please"
+            securityTextEntry
+            textContentType="password"
+          />
+          <SubmitButton
+            title="Register"
+            onPress={() => navigation.navigate(routes.LOGIN)}
+          />
+        </Form>
+      </Screen>
+    </ImageBackground>
+  );
+};
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    width: "100%",
+  },
+  background: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    borderRadius: 15,
+  },
+  logoContainer: {
+    position: "absolute",
+    top: 70,
+    alignItems: "center",
+  },
+  tagline: {
+    fontSize: 18,
+    fontWeight: "600",
+    paddingVertical: 20,
+  },
+});
+export default Register;

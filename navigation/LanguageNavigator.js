@@ -1,40 +1,42 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import LoginScreen from "../screens/LoginScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import TutorialsScreen from "../screens/TutorialsScreen";
-import WelcomeScreen from "../screens/WelcomeScreen";
-import RegisterScreen from "../screens/RegisterScreen";
+import Register from "../screens/RegisterScreen";
+import WelcomeScreen from "../screens/Courses";
 
-const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const LanguageNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
+      <Tab.Navigator initialRouteName="Home">
+        <Tab.Screen
+          name="Home"
+          component={Register}
           options={{
-            title: "Home",
-            headerStyle: {
-              backgroundColor: "#f4511e",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
           }}
         />
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Tutorials" component={TutorialsScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-      </Stack.Navigator>
+        <Tab.Screen
+          name="Courses"
+          component={WelcomeScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="account"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };

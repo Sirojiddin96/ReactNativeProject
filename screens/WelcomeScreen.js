@@ -1,47 +1,55 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-
-function WelcomeScreen({ navigation }) {
+import { View, Text, ImageBackground, StyleSheet, Image } from "react-native";
+import routes from "../navigation/routes";
+import Button from "../components/Button";
+export default function WelcomeScreen({ navigation }) {
   return (
-    <>
-      <View style={styles.container}>
-        <Text>Welcome here</Text>
+    <ImageBackground
+      blurRadius={10}
+      style={styles.background}
+      source={require("../assets/images/background.jpg")}
+    >
+      <View style={styles.logoContainer}>
+        <Image
+          style={styles.logo}
+          source={require("../assets/images/imageLogo.jpg")}
+        />
+        <Text style={styles.tagline}>Start your Korean language Advanture</Text>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <Button title="Login" onPress={() => navigation.navigate("Login")} />
         <Button
-          title="Go to Tutorials"
-          onPress={() => navigation.navigate("Tutorials")}
+          title="Register"
+          onPress={() => navigation.navigate("Register")}
         />
       </View>
-      <View style={styles.container}>
-        <Text>Welcome here</Text>
-        <Button
-          title="Go to Tutorials"
-          onPress={() => navigation.navigate("Tutorials")}
-        />
-      </View>
-      <View style={styles.container}>
-        <Text>Welcome here</Text>
-        <Button
-          title="Go to Tutorials"
-          onPress={() => navigation.navigate("Tutorials")}
-        />
-      </View>
-      <View style={styles.container}>
-        <Text>Welcome here</Text>
-        <Button
-          title="Go to Tutorials"
-          onPress={() => navigation.navigate("Tutorials")}
-        />
-      </View>
-    </>
+    </ImageBackground>
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
+  background: {
     flex: 1,
-    backgroundColor: "#fff",
+    justifyContent: "flex-end",
     alignItems: "center",
-    justifyContent: "center",
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    borderRadius: 15,
+  },
+  logoContainer: {
+    position: "absolute",
+    top: 100,
+    flex: 1,
+    alignItems: "center",
+  },
+  tagline: {
+    fontSize: 18,
+    fontWeight: "600",
+    paddingVertical: 20,
+  },
+  buttonsContainer: {
+    padding: 20,
+    width: "100%",
   },
 });
-export default WelcomeScreen;
