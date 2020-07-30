@@ -9,14 +9,14 @@ import ListItemDeleteItemAction from "../components/ListItemDeleteItemAction";
 const initialMessages = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
+    title: "Karimov Sirojiddin",
+    description: "Hey! Is this Item still Availabe",
     image: require("../../assets/image.jpg"),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2",
+    title: "Karimov Sirojiddin",
+    description: "When will you be able to post it?",
     image: require("../../assets/image.jpg"),
   },
 ];
@@ -49,8 +49,8 @@ export default function MessagesScreen() {
           setMessages([
             {
               id: 2,
-              title: "T2",
-              description: "D2",
+              title: "Karimov Sirojiddin",
+              description: "When will you be able to post it?",
               image: require("../../assets/image.jpg"),
             },
           ]);
